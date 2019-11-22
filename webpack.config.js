@@ -6,9 +6,17 @@ const publicPath = path.resolve(__dirname, 'public');
 
 module.exports = {
   mode: 'development',
+  watch: true,
+  watchOptions: {
+    aggregateTimeout: 600,
+    ignored: [
+      'server.js',
+      'index.js',
+    ],
+  },
   entry: [
     'react-hot-loader/patch',
-    'webpack-hot-middleware/client?reload=false',
+    'webpack-hot-middleware/client?path=/__react_webpack_hmr',
     path.resolve(__dirname, './client/index.jsx'),
   ],
   output: {

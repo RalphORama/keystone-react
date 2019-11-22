@@ -3,11 +3,10 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const { keystone, apps } = require('./index.js');
+const webpackConfig = require('./webpack.config');
 
 const dev = process.env.NODE_ENV !== 'production';
 const port = 3000;
-
-const webpackConfig = require('./webpack.config');
 const compiler = webpack(webpackConfig);
 
 keystone
@@ -17,25 +16,24 @@ keystone
     const app = express();
 
     if (dev) {
-      console.log('> Setting up webpack-dev-middleware');
+      console.log('✔ Starting Webpack build...');
       app.use(webpackDevMiddleware(compiler, {
         logLevel: 'warn',
         publicPath: webpackConfig.output.publicPath,
       }));
 
-      console.log('> Setting up webpack-hot-middleware');
       app.use(webpackHotMiddleware(compiler, {
-        log: console.log,
-        path: '/__webpack_hmr',
-        heartbeat: 10 * 1000,
-        reload: false,
+        // Use custom HMR path so we don't conflict with Keystone's HMR
+        path: '/__react_webpack_hmr',
       }));
     }
 
-    console.log('> Setting up other middleware');
     app.use(middlewares);
 
     app.listen(port, () => {
-      console.log(`> Listening on http://localhost:${port}`);
+      console.log(`✔ Keystone instance is ready at http://localhost:${port} 🚀`);
+      console.log(`🔗 Keystone Admin UI:   http://localhost:${port}/admin`);
+      console.log(`🔗 GraphQL Playground:  http://localhost:${port}/admin/graphiql`);
+      console.log(`🔗 GraphQL API:         http://localhost:${port}/admin/api`);
     });
   });
