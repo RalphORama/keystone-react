@@ -1,4 +1,4 @@
-# Keystone + React
+# Keystone + React Project Template
 
 [![Code Style](https://badgen.net/badge/code%20style/airbnb/ff5a5f?icon=airbnb)](https://github.com/airbnb/javascript)
 
@@ -23,7 +23,7 @@ This project comes pre-loaded with the Apollo GraphQL client for React.  See [Ge
 ## To-Do
 
 - [x] Update build script to run Webpack as well.
-- [ ] Write Webpack production config.
+- [ ] Write Webpack production config. ([#2](https://github.com/RalphORama/keystone-react/issues/2))
 
 
 ## Project Structure
